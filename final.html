@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISTRIBUIDORA HERNANDEZ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 90px;
+
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bienvenido a la distribuidora Hernandez, vamos a calcular tu Salario</h1>
+
+    <form id="calculadoraForm">
+        <label for="nombre">Ingrese su Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <label for="cargo">Seleccione su Cargo:</label>
+        <select id="cargo" name="cargo" required>
+            <option value="supervisor">Supervisor</option>
+            <option value="secretaria">Secretaria</option>
+            <option value="mensajero">Mensajero</option>
+        </select>
+
+
+        <br>
+        <label for="horasExtras">Cuantas Horas Extras Hizo:</label>
+        <input type="number" id="horasExtras" name="horasExtras" min="0" value="0" required>
+        <br>
+        <button type="button" onclick="calcularSalario()">Calcular Salario</button>
+    </form>
+
+    <div id="resultadoSalario"></div>
+
+    <script>
+        function calcularSalario() {
+            var nombre = document.getElementById("nombre").value;
+            var cargo = document.getElementById("cargo").value;
+            var horasExtras = parseFloat(document.getElementById("horasExtras").value);
+
+            var salarioBase;
+
+            switch (cargo) {
+                case "supervisor":
+                    salarioBase = 4500;
+                    break;
+                case "secretaria":
+                    salarioBase = 3250;
+                    break;
+                case "mensajero":
+                    salarioBase = 2800;
+                    break;
+                default:
+                    salarioBase = 0;
+            }
+
+            var bonificacion = 250;
+            var valorHoraExtra = 15.75;
+
+            var salarioLiquido = salarioBase + bonificacion + (horasExtras * valorHoraExtra);
+
+            var mensaje = "¡Hola, " + nombre + "! Tu salario líquido es de Q" + salarioLiquido.toFixed(2) + ".";
+
+            document.getElementById("resultadoSalario").innerHTML = mensaje;
+        }
+    </script>
+
+</body>
+</html>
